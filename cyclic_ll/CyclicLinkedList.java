@@ -1,10 +1,10 @@
-package linked_list;
+package cyclic_ll;
 
-public class LinkedList {
+public class CyclicLinkedList {
 	private Node head;
 	private Node tail;
 	
-	public LinkedList() {
+	public CyclicLinkedList() {
 		this.head = null;
 		this.tail = null;
 	}
@@ -20,10 +20,14 @@ public class LinkedList {
 			head = newNode;
 		}
 		
-		// C. Obj
-		// obj->next = head
-		// change head
+		
+		tail.next = head;
+		
 	}
+	
+	
+	
+	
 	
 	public void insertNext(int nextTo, int data) {
 		// search for the node
@@ -37,10 +41,13 @@ public class LinkedList {
 			
 			if(tail == result) {
 				tail= newNode;
+				
+				
+				tail.next = head;
+				
 			}
+			
 		}
-		
-		
 		
 	}
 	
@@ -59,17 +66,32 @@ public class LinkedList {
 	}
 	
 	
+	
+	
+	
 	public void insertTail(int data) {
 		if(isEmpty()) {	// list is empty
 			Node newNode = new Node(data);
 			head = newNode;
 			tail = newNode;
+			
+			tail.next = head;
+			
 		}else {
 			Node newNode = new Node(data);
 			tail.next = newNode;
 			tail = newNode;
+			
+			tail.next = head;
 		}		
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	public void delete(int data) {
@@ -80,10 +102,14 @@ public class LinkedList {
 			if(current.getData() == data) {
 				if(current == head) {	// *************
 					head = current.next;
+					
+					tail.next = head;
 				}
 				
 				if(current == tail) {	// *************
 					tail = previous;
+					
+					tail.next = head;
 				}
 				
 				previous.next = current.next;
@@ -112,7 +138,12 @@ public class LinkedList {
 			System.out.println(temp.getData());
 			
 			temp = temp.next;
+			
+			if(temp == head) {
+				break;
+			}
+			
 		}
 	}
-	
+
 }
